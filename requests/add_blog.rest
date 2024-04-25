@@ -2,8 +2,8 @@ POST http://localhost:3003/api/blogs
 Content-Type: application/json
 
 {
-    "title": "Kirkkoblogi",
-    "author": "Sini Jokinen",
-    "url": "https://kirkonopas.blogspot.com/",
-    "likes": 6
+    "title": "Suklaapossu",
+    "author": "Suklaapossu",
+    "url": "https://suklaapossu.blogspot.com/",
+    "likes": 8
 }
