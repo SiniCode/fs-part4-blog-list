@@ -1,0 +1,9 @@
+PUT http://localhost:3003/api/blogs/662ab1bfcfc92dd9c367417a
+Content-Type: application/json
+
+{
+    "title": "Suklaapossu",
+    "author": "Suklaapossu",
+    "url": "https://suklaapossu.blogspot.com/",
+    "likes": 9
+}
