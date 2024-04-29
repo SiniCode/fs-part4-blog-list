@@ -102,9 +102,9 @@ test('a blog can be deleted', async () => {
     assert(!(contents.includes('React patterns')))
 })
 
-/* test('the number of likes can be updated', async () => {
+test('the number of likes can be updated with complete info', async () => {
     const blogToUpdate = (await api.get('/api/blogs')).body[0]
-    console.log(blogToUpdate.id)
+
     const update = { 
         title: blogToUpdate.title,
         author: blogToUpdate.author,
@@ -113,7 +113,15 @@ test('a blog can be deleted', async () => {
     }
     const updatedBlog = await api.put(`/api/blogs/${blogToUpdate.id}`).send(update)
     assert.strictEqual(updatedBlog.body.likes, 8)
-}) */
+})
+
+test ('the number of likes can be updated with just that info', async () => {
+    const blogToUpdate = (await api.get('/api/blogs')).body[0]
+
+    const update = { likes: 10 }
+    const updatedBlog = await api.put(`/api/blogs/${blogToUpdate.id}`).send(update)
+    assert.strictEqual(updatedBlog.body.likes, 10) 
+})
 
 after(async () => {
     await mongoose.connection.close()
