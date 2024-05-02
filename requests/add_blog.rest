@@ -1,9 +1,10 @@
 POST http://localhost:3003/api/blogs
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InBvb2giLCJpZCI6IjY2MzNiYTdkNTdhNGNkNGI1YjRjZWU3YSIsImlhdCI6MTcxNDY2NzczNCwiZXhwIjoxNzE0NjcxMzM0fQ.zn5-kKFOr2L0XEDvLCoV69KgsvoDvfkavHowS_0htIo
 
 {
     "title": "Suklaapossu",
     "author": "Suklaapossu",
     "url": "https://suklaapossu.blogspot.com/",
-    "likes": 8
+    "likes": 9
 }

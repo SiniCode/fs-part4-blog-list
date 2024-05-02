@@ -1,5 +1,6 @@
-PUT http://localhost:3003/api/blogs/662ab1bfcfc92dd9c367417a
+PUT http://localhost:3003/api/blogs/66339bc97ab8fb720aa1175e
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkRhaXN5IiwiaWQiOiI2NjMzOTRmOTMzMzBhNTM1YjE2ZDM1ODYiLCJpYXQiOjE3MTQ2NjE5NjUsImV4cCI6MTcxNDY2NTU2NX0.pYEU5AVVXgVCZm9nEslZa8Bl-MrORnWURpV4iyA_c8A
 
 {
     "title": "Suklaapossu",
