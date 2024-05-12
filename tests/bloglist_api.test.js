@@ -62,27 +62,21 @@ describe('when there are initially two blogs and one user in db', () => {
     })
     
     test('there are two blogs', async () => {
-        const token = await getToken()
         const response = await api
             .get('/api/blogs')
-            .set('Authorization', token)
     
         assert.strictEqual(response.body.length, 2)
     })
 
     test('blogs are returned as json', async () => {
-        const token = await getToken()
         await api
             .get('/api/blogs')
-            .set('Authorization', token)
             .expect('Content-Type', /application\/json/)
     })
 
     test('blogs have identifier called id', async () => {
-        const token = await getToken()
         const response = await api
             .get('/api/blogs')
-            .set('Authorization', token)
         assert(Object.hasOwn(response.body[0], 'id'))
     })
 
@@ -136,7 +130,7 @@ describe('when there are initially two blogs and one user in db', () => {
             .post('/api/blogs')
             .send(newBlog)
             .set('Authorization', token)
-            .expect(404)
+            .expect(400)
 
         const blogs = await helper.blogsInDb()
         assert.strictEqual(blogs.length, 2)
@@ -154,7 +148,7 @@ describe('when there are initially two blogs and one user in db', () => {
             .post('/api/blogs')
             .send(newBlog)
             .set('Authorization', token)
-            .expect(404)
+            .expect(400)
 
         const blogs = await helper.blogsInDb()
         assert.strictEqual(blogs.length, 2)
@@ -176,13 +170,10 @@ describe('when there are initially two blogs and one user in db', () => {
     })
 
     test ('the number of likes can be updated', async () => {
-        const token = await getToken()
-    
         const update = { likes: 10 }
         const updatedBlog = await api
             .put('/api/blogs/6633c1d7c503da7056623e06')
             .send(update)
-            .set('Authorization', token)
 
         assert.strictEqual(updatedBlog.body.likes, 10) 
     })

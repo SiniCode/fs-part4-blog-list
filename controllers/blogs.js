@@ -1,6 +1,7 @@
 const blogsRouter = require('express').Router()
 const Blog = require('../models/blog')
 const User = require('../models/user')
+const userExtractor = require('../utils/middleware').userExtractor
 
 
 blogsRouter.get('/', async (request, response) => {
@@ -8,13 +9,16 @@ blogsRouter.get('/', async (request, response) => {
     response.json(blogs)
 })
   
-blogsRouter.post('/', async (request, response) => {
+blogsRouter.post('/', userExtractor, async (request, response) => {
     const body = request.body
-
     const user = await User.findById(request.user)
 
+    if (!user ) {
+        return response.status(403).json({ error: 'User missing' })
+    }  
+
     if (!(body.title && body.url)) {
-        return response.status(404).end()
+        return response.status(400).json({ error: 'Blog must have title and url' })
     }
 
     const blog = new Blog({
@@ -22,7 +26,7 @@ blogsRouter.post('/', async (request, response) => {
         author: body.author,
         url: body.url,
         likes: body.likes || 0,
-        user: user._id
+        user: user
     })
 
     const savedBlog = await blog.save()
@@ -34,7 +38,7 @@ blogsRouter.post('/', async (request, response) => {
         .json(savedBlog)
 })
 
-blogsRouter.delete('/:id', async (request, response) => {
+blogsRouter.delete('/:id', userExtractor, async (request, response) => {
     const blog = await Blog.findById(request.params.id)
     if (blog.user.toString() !== request.user.toString()) {
         return response.status(401).json({ error: 'Unauthorized operation' })
@@ -45,9 +49,6 @@ blogsRouter.delete('/:id', async (request, response) => {
 
 blogsRouter.put('/:id', async (request, response) => {
     const oldBlog = await Blog.findById(request.params.id)
-    if (oldBlog.user.toString() !== request.user.toString()) {
-        return response.status(401).json({ error: 'Unauthorized operation' })
-    }
 
     const body = request.body
 
